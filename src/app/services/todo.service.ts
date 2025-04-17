@@ -15,8 +15,8 @@ export interface Todo {
   providedIn: 'root'
 })
 export class TodoService {
-  private crudUrl = 'http://localhost:3000/todos';
-  private favoritesUrl = 'http://localhost:3001/favorites';
+  private crudUrl = 'http://localhost:38799/todos';
+  private favoritesUrl = 'http://localhost:38204/favorites';
 
   constructor(private http: HttpClient) {}
 

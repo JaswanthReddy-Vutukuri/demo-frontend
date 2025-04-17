@@ -21,9 +21,10 @@ FROM nginx:alpine
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy built Angular app from previous stage to Nginx's html folder
-COPY --from=build /app/dist/your-frontend /usr/share/nginx/html
+COPY --from=build /app/dist/todo-app /usr/share/nginx/html
 
 # Expose port 80 (default HTTP port)
 EXPOSE 80
 
 # Nginx runs by default, no CMD needed here
+CMD ["nginx", "-g", "daemon off;"]

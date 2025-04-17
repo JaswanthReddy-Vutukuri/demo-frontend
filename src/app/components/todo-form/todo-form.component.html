@@ -1,0 +1,15 @@
+<h2>Add New Todo</h2>
+<form (ngSubmit)="addTodo()" class="todo-form">
+  <div class="form-row">
+    <label for="title">Title:</label>
+    <input id="title" [(ngModel)]="newTodo.title" name="title" required />
+  </div>
+  <div class="form-row">
+    <label for="description">Description:</label>
+    <input id="description" [(ngModel)]="newTodo.description" name="description" />
+  </div>
+  <div class="form-row button-row">
+    <div></div>
+    <button type="submit">Add Todo</button>
+  </div>
+</form>

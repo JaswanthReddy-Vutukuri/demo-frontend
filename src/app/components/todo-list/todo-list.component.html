@@ -1,0 +1,99 @@
+<app-todo-form (todoAdded)="loadTodosWithFavorites()"></app-todo-form>
+<hr />
+<h2>Todo List <button (click)="loadTodosWithFavorites()" class="refresh-button" [disabled]="isLoading">
+  Refresh
+</button></h2>
+
+<div *ngIf="isLoading" class="spinner-container">
+  <div class="spinner"></div>
+</div>
+
+<!-- <div>
+  <div class="table-container" *ngIf="!isLoading">
+    <table class="todo-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Favorite</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <div class="table-body-container">
+        <tbody>
+          <tr *ngFor="let todo of todos; let i = index">
+            <td>
+              <span *ngIf="editIndex !== i">{{ todo.title }}</span>
+              <input title="title" placeholder="" *ngIf="editIndex === i" [(ngModel)]="editTitle" />
+            </td>
+            <td>
+              <span *ngIf="editIndex !== i">{{ todo.description }}</span>
+              <input title="description" placeholder="" *ngIf="editIndex === i" [(ngModel)]="editDescription" />
+            </td>
+            <td>
+              <button (click)="toggleFavorite(todo)">
+                {{ todo.isFavorite ? '★' : '☆' }}
+              </button>
+            </td>
+            <td>
+              <ng-container *ngIf="editIndex !== i">
+                <button (click)="startEdit(i, todo)">Edit</button>
+                <button class="del-btn" (click)="deleteTodo(todo.id)">Delete</button>
+              </ng-container>
+              <ng-container *ngIf="editIndex === i">
+                <button (click)="updateTodo(todo)">Update</button>
+                <button class="cancel-btn" (click)="cancelEdit()">Cancel</button>
+              </ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </div>
+    </table>
+  </div>
+</div> -->
+
+<div class="table-container">
+  <table class="todo-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Favorite</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+  </table>
+
+  <div class="table-body-container">
+    <table class="todo-table">
+      <tbody>
+        <tr *ngFor="let todo of todos; let i = index">
+          <td>
+            <span *ngIf="editIndex !== i">{{ todo.title }}</span>
+            <input title="title" placeholder="" *ngIf="editIndex === i" [(ngModel)]="editTitle" />
+          </td>
+          <td>
+            <span *ngIf="editIndex !== i">{{ todo.description }}</span>
+            <input title="description" placeholder="" *ngIf="editIndex === i" [(ngModel)]="editDescription" />
+          </td>
+          <td>
+            <button (click)="toggleFavorite(todo)">
+              {{ todo.isFavorite ? '★' : '☆' }}
+            </button>
+          </td>
+          <td>
+            <ng-container *ngIf="editIndex !== i">
+              <button (click)="startEdit(i, todo)">Edit</button>
+              <button class="del-btn" (click)="deleteTodo(todo.id)">Delete</button>
+            </ng-container>
+            <ng-container *ngIf="editIndex === i">
+              <button (click)="updateTodo(todo)">Update</button>
+              <button class="cancel-btn" (click)="cancelEdit()">Cancel</button>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

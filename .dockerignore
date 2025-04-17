@@ -1,0 +1,32 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+/e2e/*.js
+/e2e/*.map
+
+# Build output
+/dist
+/tmp
+/out-tsc
+
+# IDE files
+/.idea
+/.vscode
+*.sublime-workspace
+
+# Misc
+/.sass-cache
+/connect.lock
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db

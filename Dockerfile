@@ -1,30 +1,23 @@
-# Stage 1: Build Angular app using Node.js official image
-FROM node:18-alpine AS build
-
-# Set working directory inside container
+# Development Dockerfile for Angular
+FROM artifactory.otxlab.net/core-docker-dev/hardened/node18-alpine3:18.20.5.202411.3274914-alpine-11eea529.3366681 as development
 WORKDIR /app
-
-# Copy package files and install dependencies (npm ci for clean install)
+RUN npm install -g @angular/cli
 COPY package.json package-lock.json ./
 RUN npm ci
-
-# Copy all source files to container
 COPY . .
+EXPOSE 4200
+CMD ["ng", "serve", "--host", "0.0.0.0", "--disable-host-check"]
 
-# Build Angular app in production mode (outputs to /dist/your-frontend)
+# Production Dockerfile for Angular
+FROM artifactory.otxlab.net/core-docker-dev/hardened/node18-alpine3:18.20.5.202411.3274914-alpine-11eea529.3366681 as builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
 RUN npm run build --prod
 
-# Stage 2: Use lightweight Nginx image to serve built files
-FROM nginx:alpine
-
-# Copy custom Nginx configuration to container
-COPY nginx.conf /etc/nginx/nginx.conf
-
-# Copy built Angular app from previous stage to Nginx's html folder
-COPY --from=build /app/dist/todo-app /usr/share/nginx/html
-
-# Expose port 38798 (default HTTP port)
-EXPOSE 38798
-
-# Nginx runs by default, no CMD needed here
+FROM artifactory.otxlab.net/core-docker-dev/nginx:1.27.1.202409.2691649-alpine-f9e67ba1.2695538 as production
+COPY --from=builder /app/dist/todo-app /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 81
 CMD ["nginx", "-g", "daemon off;"]

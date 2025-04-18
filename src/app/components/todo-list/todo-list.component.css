@@ -86,12 +86,12 @@ button:nth-child(2) {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 150px; /* height similar to table */
+  height: 150px;
 }
 
 .spinner {
-  border: 6px solid #f3f3f3; /* Light grey */
-  border-top: 6px solid #1976d2; /* Blue */
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #1976d2;
   border-radius: 50%;
   width: 40px;
   height: 40px;
